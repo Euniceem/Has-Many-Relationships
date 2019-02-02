@@ -18,21 +18,21 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS posts;
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users (id) NOT NULL,
   title VARCHAR(180) NULL default NULL,
   url VARCHAR(510) NULL default NULL,
   content text NULL default NULL,
   created_at timestamp with time zone NOT NULL default now(),
-  updated_at timestamp with time zone NOT NULL default now()
+  updated_at timestamp with time zone NOT NULL default now(),
+  user_id INTEGER REFERENCES users
 );
 
 DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users (id),
-  posts_id INTEGER REFERENCES posts (id),
   body VARCHAR(510) NULL default NULL,
   created_at timestamp with time zone NOT NULL default now(),
-  updated_at timestamp with time zone NOT NULL default now()
+  updated_at timestamp with time zone NOT NULL default now(),
+  user_id INTEGER REFERENCES users,
+  posts_id INTEGER REFERENCES posts
 );
 
